@@ -9,45 +9,49 @@ int main() {
 	vector<string> data;
 	vector<vector<string> > rows;
 	int i;	
-	string data1, data2, data3, input, tmp;
+	string data1, input, tmp;
 	int qty;
 	stringstream ss;
 	
 	getline(cin,input);
 	ss<<input;
 	ss>>i;
-	
+	rows.reserve(i);
+	data.reserve(3);
+
 	for(int j=0;j<i&&j<1000;j++){
 		getline(cin, input);
 		tmp.clear();
 		int l = 0;
-		for (int k=0; k<input.size(); k++){
-			tmp+=input[k];
-			ss.clear();
+        int is=input.size();
+		for (int k=0; k<is; k++){
 			if (input[k]==' '){
+    			ss.clear();
 				ss<<tmp;
+				ss>>data1;
 				if (l==0){
-					ss>>data1;
+            		data.clear();		
 					data.push_back(data1);
 					l++;
 				} else if (l==1){
-					ss>>data2;
-					data.push_back(data2);
+					data.push_back(data1);
 					l++;
 				} else if (l==2){
-					ss>>data3;
-					data.push_back(data3);
+					data.push_back(data1);
 					l++;
 				}
 				tmp.clear();
-			}
+			} else {
+                tmp+=input[k];
+            }
 		}
-		ss.clear();
-		ss<<tmp;
-		ss>>data3;
-		data.push_back(data3);
+		if (rows.size()==i-1){
+			ss.clear();
+			ss<<tmp;
+			ss>>data1;
+			data.push_back(data1);
+		}
 		rows.push_back(data);
-		data.clear();		
 	}
 	//cout<<rows.size()<<endl;
 
@@ -62,7 +66,8 @@ int main() {
 			string place=data[2];
 			string animal=data[0];
 			int count = 0;
-			if (i>rows.size()){
+			int rs=rows.size();
+			if (i>rs){
 				cout<<endl;
 			}
 			cout<<place<<":"<<animal<<" ";
@@ -83,6 +88,8 @@ int main() {
 						ss>>qty;
 						count+=qty;
 						rows.erase(it);
+						if (rows.size()>0)
+							it--;
 					}
 					if (it==rows.end()){
 						break;
@@ -105,6 +112,7 @@ int main() {
 						ss>>qty;
 						count=qty<=100?qty:100;
 						rows.erase(it);
+						rows.resize(rows.size());
 					}
 					if (it==rows.end()){
 						break;
