@@ -43,6 +43,7 @@ int main() {
 	loop=1;
 	b=0;
 	out=0;
+	score=0;
 	inning1=false;
 	 
 	it=batter.begin();
@@ -70,20 +71,21 @@ int main() {
 			base[1]=0;
 			base[0]=0;
 		} else if (hit[loop]=="HR"){
-			base[3]+=base[2]==1||base[1]==1||base[0]==1?(base[2]+base[1]+base[0]+1):0;
+			base[3]+=base[2]==1||base[1]==1||base[0]==1?(base[2]+base[1]+base[0]+1):1;
 			base[2]=0;
 			base[1]=0;
 			base[0]=0;
 		} else if (hit[loop]=="FO"||hit[loop]=="GO"||hit[loop]=="SO"){
 			out++;
-			inning1=inning1?false:inning1;
+			//inning1=inning1?false:inning1;
 		} 
-		score=base[3];
+		score+=base[3];
+		base[3]=0;
 		it++;
-		if (out%27==3&&!inning1){
+		if (out%3==0 && out!=0){
 			base[0]=0;base[1]=0;base[2]=0;base[3]=0;
 			inning++;
-			inning1=true;
+			//inning1=true;
 		}
 	}
 	cout<<score<<endl;

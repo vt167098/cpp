@@ -9,12 +9,17 @@ vector< vector<int> > matrix_2d;
 vector<int> matrix;
 
 void display_matrix(){
+    cout<<matrix_2d.size()<<" "<<matrix_2d[0].size()<<endl;
 	for (int i=0; i<matrix_2d.size(); i++){
 		matrix = matrix_2d[i];
 		for (int j=0; j<matrix.size(); j++){
-			cout<<matrix[j]<<" ";
+			cout<<matrix[j];
+			if (j==matrix.size()-1)
+				cout<<endl;
+			else
+				cout<<" ";
 		}
-		cout<<endl;
+		
 	}
 }
 
@@ -22,7 +27,6 @@ void rotate_matrix(){
 	vector< vector<int> >matrix_2d_t;
 	vector<int>matrix_t;
 
-	int count = 0;
 	for (int i=matrix_2d.size()-1; i>=0; i--){
 		for (int j=0; j<matrix_2d[i].size(); j++){
 			if (matrix_2d_t.empty()||i==matrix_2d.size()-1){
@@ -41,12 +45,13 @@ void rotate_matrix(){
 }
 
 void mirror_matrix(){
-	vector<int>matrix_t;
-	for (vector< vector<int> >::iterator it=matrix_2d.begin(); it!=matrix_2d.end(); it++){
-		matrix_t=*it;
-		reverse(matrix_t.begin(), matrix_t.end());
-		swap(matrix_t, *it);		
-	}
+	// vector<int>matrix_t;
+	// for (vector< vector<int> >::iterator it=matrix_2d.begin(); it!=matrix_2d.end(); it++){
+	// 	matrix_t=*it;
+	// 	reverse(matrix_t.begin(), matrix_t.end());
+	// 	swap(matrix_t, *it);		
+	// }
+	reverse(matrix_2d.begin(),matrix_2d.end());
 }
 
 int main() {
@@ -59,8 +64,34 @@ int main() {
 	int c0=0;
 	vector<int> act;
 
-	cin>>r>>c>>n;
-	while (i<r){
+	while (cin>>r>>c>>n&&r>0&&r<11&&c>0&&c<11&&n>0&&n<11)
+	{
+		while (i<r){
+			c0=0;
+			getline(cin, input);
+			for (int j=0; j<input.size(); j++){
+				num_s+=input[j];
+				if (input[j]==' '){
+					ss.clear();
+					ss<<num_s;
+					ss>>num;
+					matrix.push_back(num);
+					num_s.clear();
+					if (++c0>=c)
+						break;
+				}
+			}
+			ss.clear();
+			ss<<num_s;
+			ss>>num;
+			if (c0>0){
+				matrix.push_back(num);
+				num_s.clear();
+				matrix_2d.push_back(matrix);
+				matrix.clear();
+				i++;
+			}
+		}
 		c0=0;
 		getline(cin, input);
 		for (int j=0; j<input.size(); j++){
@@ -69,51 +100,29 @@ int main() {
 				ss.clear();
 				ss<<num_s;
 				ss>>num;
-				matrix.push_back(num);
+				act.push_back(num);
 				num_s.clear();
-				if (++c0>=c)
+				if (++c0>=n)
 					break;
 			}
 		}
 		ss.clear();
 		ss<<num_s;
 		ss>>num;
-		if (c0>0){
-			matrix.push_back(num);
-			num_s.clear();
-			matrix_2d.push_back(matrix);
-			matrix.clear();
-			i++;
-		}
-	}
-	c0=0;
-	getline(cin, input);
-	for (int j=0; j<input.size(); j++){
-		num_s+=input[j];
-		if (input[j]==' '){
-			ss.clear();
-			ss<<num_s;
-			ss>>num;
-			act.push_back(num);
-			num_s.clear();
-			if (++c0>=n)
-				break;
-		}
-	}
-	ss.clear();
-	ss<<num_s;
-	ss>>num;
-	act.push_back(num);
+		act.push_back(num);
 
-	for (int k=0; k<act.size(); k++){
-		if (act[k]==0){
-			rotate_matrix();
-			//display_matrix();
-		} else if (act[k]==1){	
-			mirror_matrix();
-			//display_matrix();
+		for (int k=0; k<act.size(); k++){
+			if (act[k]==0){
+				rotate_matrix();
+				//display_matrix();
+			} else if (act[k]==1){	
+				mirror_matrix();
+				//display_matrix();
+			}
 		}
+		display_matrix();
+		break;
 	}
-	display_matrix();
+	
 	return 0;
 }
