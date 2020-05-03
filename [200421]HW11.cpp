@@ -1,28 +1,23 @@
 #include <iostream>
 #include <bitset> 
+#include <math.h> 
 
 using namespace std;
-int findPrime(int n){
-	for (int k=n;k>1;k--){
-		if (k%2==0&&k!=2){
-			continue;
-		} else {
-			for (int j=2; j<=k; j++){
-				if (k%j==0&&j<k){
-					break;
-				} else if (j==k){
-					return k;
-				}	
-			}
-		}
-	}
-	return 0;
+
+bool findPrime(unsigned long n)
+{
+    // 檢查小於等於sqrt(n)的因數（除了1）
+    unsigned long sqrt_n = sqrt(n);
+    for (unsigned long d=2; d<=sqrt_n; ++d)
+        if (n % d == 0)
+            return false;
+    return true;
 }
 
-bitset<32> convBinary(const unsigned int val)
+bitset<32> convBinary(const unsigned long val)
 {
 	bitset<32> b;
-	for(int i = 32; i >= 0; i--)
+	for(int i = 31; i >= 0; i--)
 	{
 		if(val & (1 << i))
 			b[i]=1;
@@ -32,14 +27,14 @@ bitset<32> convBinary(const unsigned int val)
 	return b;
 }
 int main(){
-	int p,s;
+	unsigned long p, p0;
 	bitset<32> b,pb;
 	
 	while(cin>>p&&p>0){
 		b = convBinary(p);
 		//cout<<b<<endl;
-		for (int i=p; i>1; i--){
-			int p0 = findPrime(i);
+		for (unsigned long i=p; i>1; i--){
+			p0 = findPrime(i)?i:0;
 			if (p0!=0){
 				pb = convBinary(p0);
 				if (b.count()==pb.count()){
