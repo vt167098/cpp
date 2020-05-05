@@ -7,11 +7,13 @@ int effect(int a, int b, int c){
 }
 
 int main(){
-	int n,m,s;
+	long long n,m,s;
 
-    while(cin>>n&&n>1&&n<=20){
+    //while(cin>>n&&n>1&&n<=20){
+        cin>>n;
         for (int i=0; i<n; i++){
-            while(cin>>m&&m>2&&m<=30){
+            //while(cin>>m&&m>2&&m<=30){
+                cin>>m;
                 int s[m];
                 int k=1;
                 int el=0;
@@ -31,11 +33,9 @@ int main(){
                     k--;
                 }
                 (er>el)?(cout<<er<<" "<<el<<endl):(cout<<el<<" "<<er<<endl);
-                m=0;
-            }
+            //}
         }
-        n=0;
-    }
+    //}
 	
     return 0;
 }

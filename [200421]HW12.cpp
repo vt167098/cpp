@@ -1,57 +1,35 @@
 #include <iostream>
-#include <string.h>
 #include <stdlib.h> 
 
 using namespace std;
-struct Square
-{
-    int x0, y0;
-};
+long double x0, y0;
 
-Square runSquare(int x, int y, int w, int n, Square s0){
-	Square q; 
+void runSquare(long double x, long double y, long double w, long double n){
 	//cout<<endl<<n<<" "<<w<<" "<<s0.x0<<" "<<s0.y0<<" "<<x<<" "<<y;
-   	for (int i=0; i<4; i++){
-   		//cout<<n<<" "<<i<<" "<<s0.x0<<" "<<s0.y0<<" "<<x<<" "<<y<<endl;
-   		if (i==0){
-   			q.x0 = x+w/2;
-   			q.y0 = y+w/2;
-		} else if (i==1){
-   			q.x0 = x+w/2;
-   			q.y0 = y-w/2;
-		} else if (i==2){
-   			q.x0 = x-w/2;
-   			q.y0 = y-w/2;
-		} else if (i==3){
-   			q.x0 = x-w/2;
-   			q.y0 = y+w/2;
-		}
-
-        s0.x0 += q.x0>0&&q.y0>0?q.x0:0;
-        s0.y0 += q.x0>0&&q.y0>0?q.y0:0;
-
-        if (n>0){ 
-        	s0 = runSquare(q.x0, q.y0, w/2, n-1, s0);   
-		}
- 
+	if (n<0) return;
+	if (x>0&&y>0){
+		x0+=x;
+		y0+=y;
 	}
+	runSquare(x+w,y+w,w/2,n-1);
+	runSquare(x+w,y-w,w/2,n-1);
+	runSquare(x-w,y-w,w/2,n-1);
+	runSquare(x-w,y+w,w/2,n-1);
 	//cout<<"|"<<q.x0<<" "<<q.y0;
-    return s0;
 }
 
 int main(){
-    int x,y,w,n;
-    Square s;
+    long double x,y,w,n;
 
     cin>>x>>y>>w>>n;
-    s.x0=0;
-    s.y0=0;
-    while(n>0){
-	    s = runSquare(x, y, w, n, s);
-	    n--; 
-	}
+    x0=0;
+    y0=0;
+    //while(n>0){
+	    runSquare(x, y, w/2, n);
+	    //n--; 
+	//}
 	//cout<<endl;
-    cout<<s.x0<<" "<<s.y0<<endl;
+    cout<<x0<<" "<<y0<<endl;
 
     return 0;
 }
