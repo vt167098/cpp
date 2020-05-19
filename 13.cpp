@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
 		int num[k],max[k][k],min[k][k],top=1;
 		for(i=0;i<k;i++){
 			cin >> num[i];
-			top*=num[i];
+			//top*=num[i];
 		}
 		for(i=k-1;i>=0;i--)
 			for(j=0;j<k;j++){
@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 					continue;
 				}
 				else{
-					for(x=i+1;x<j;x++){ //»Ý­n¤@­ÓxÅÜ¼Æ¡A¨äindex¬°³Ì«á¤~­nreductionªº­È 
+					for(x=i+1;x<j;x++){ //ï¿½Ý­nï¿½@ï¿½ï¿½xï¿½Ü¼Æ¡Aï¿½ï¿½indexï¿½ï¿½ï¿½Ì«ï¿½~ï¿½nreductionï¿½ï¿½ï¿½ï¿½ 
 						sum=max[i][x]+max[x][j]+num[i]*num[x]*num[j];
 						sum2=min[i][x]+min[x][j]+num[i]*num[x]*num[j];
 						if(x==i+1) mini=sum2;
