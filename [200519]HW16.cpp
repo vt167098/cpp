@@ -74,14 +74,31 @@ int main() {
         for (int i=1; i<=t_data.size(); i++){
             Teacher t_temp = t_data[i];
             vector<int> m_list;
+            int pos=10;
             for (int j=1; j<=s_data.size(); j++){
                 Student s_temp = s_data[j];
                 if (s_temp.teachers[i-1]==to_string(i)){
                     s_temp.match = to_string(i);
                     s_data[j]=s_temp;
                     m_list.push_back(j);
+                    for (int k=0;k<10;k++){
+                        if (t_temp.students[k]==to_string(i)){
+                            if (k<pos){
+                                if (k<10){
+                                    Student s_temp2 = s_data[pos];
+                                    s_temp2.match = "";
+                                    s_data[pos] = s_temp2;
+                                }
+                                pos = k;
+                            }
+                        }
+                    }
+                    it = t_data.find(i);
+                    if (it != t_data.end())
+                        t_data.erase(it);
                 }
             }
+            /*
             if (m_list.size()==1){
                 it = t_data.find(i);
                 if (it != t_data.end())
@@ -95,6 +112,7 @@ int main() {
                     }
                 }
             }
+            */
         }
     }
 	return 0;
