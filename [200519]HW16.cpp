@@ -71,48 +71,45 @@ int main() {
     }
 
     while (t_data.size()>0){
-        for (int i=1; i<=t_data.size(); i++){
+        for (int i=1; i<=10; i++){
+            it = t_data.find(i);
+            if (it == t_data.end())
+                continue;
+
             Teacher t_temp = t_data[i];
-            vector<int> m_list;
-            int pos=10;
+            int pos=11;
             for (int j=1; j<=s_data.size(); j++){
                 Student s_temp = s_data[j];
+                if (s_temp.match!="")
+                    continue;
                 if (s_temp.teachers[i-1]==to_string(i)){
                     s_temp.match = to_string(i);
                     s_data[j]=s_temp;
-                    m_list.push_back(j);
                     for (int k=0;k<10;k++){
-                        if (t_temp.students[k]==to_string(i)){
-                            if (k<pos){
-                                if (k<10){
-                                    Student s_temp2 = s_data[pos];
+                        if (t_temp.students[k]==to_string(j)){
+                            if (pos>k+1){
+                                if (k<10&&pos<11){
+                                    int r = stoi(t_temp.students[pos-1]);
+                                    Student s_temp2 = s_data[r];
                                     s_temp2.match = "";
-                                    s_data[pos] = s_temp2;
+                                    s_data[r] = s_temp2;
                                 }
-                                pos = k;
+                                pos = k+1;
+                            } else {
+                                int r = stoi(t_temp.students[k]);
+                                Student s_temp2 = s_data[r];
+                                s_temp2.match = "";
+                                s_data[r] = s_temp2;
                             }
                         }
                     }
-                    it = t_data.find(i);
-                    if (it != t_data.end())
-                        t_data.erase(it);
                 }
             }
-            /*
-            if (m_list.size()==1){
+            if (pos<11){
                 it = t_data.find(i);
                 if (it != t_data.end())
                     t_data.erase(it);
-            } else if (m_list.size()>1){
-                for (int k=0; k<10; k++){
-                    for (vector<int>::iterator it1=m_list.begin(); it1!=m_list.end(); it++){
-                        if (t_temp.students[k]==to_string(*it1)){
-
-                        }
-                    }
-                }
             }
-            */
         }
     }
 	return 0;
