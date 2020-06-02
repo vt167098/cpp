@@ -1,15 +1,15 @@
-# Project: 專案13
+# Project: 專案16
 # Makefile created by Dev-C++ 5.11
 
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main13.o
-LINKOBJ  = main13.o
+OBJ      = [200519]HW16-2.o
+LINKOBJ  = [200519]HW16-2.o
 LIBS     = -L"D:/Downloads/程式開發/DevCppPortable/MinGW64/lib" -L"D:/Downloads/程式開發/DevCppPortable/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"D:/Downloads/程式開發/DevCppPortable/MinGW64/include" -I"D:/Downloads/程式開發/DevCppPortable/MinGW64/x86_64-w64-mingw32/include" -I"D:/Downloads/程式開發/DevCppPortable/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"D:/Downloads/程式開發/DevCppPortable/MinGW64/include" -I"D:/Downloads/程式開發/DevCppPortable/MinGW64/x86_64-w64-mingw32/include" -I"D:/Downloads/程式開發/DevCppPortable/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/Downloads/程式開發/DevCppPortable/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
-BIN      = 專案13.exe
+BIN      = 專案16.exe
 CXXFLAGS = $(CXXINCS) -g3
 CFLAGS   = $(INCS) -g3
 RM       = rm.exe -f
@@ -24,5 +24,5 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-main13.o: main13.cpp
-	$(CPP) -c main13.cpp -o main13.o $(CXXFLAGS)
+[200519]HW16-2.o: [200519]HW16-2.cpp
+	$(CPP) -c [200519]HW16-2.cpp -o [200519]HW16-2.o $(CXXFLAGS)

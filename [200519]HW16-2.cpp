@@ -73,9 +73,14 @@ int main() {
                 if (s_data[j].teachers[i]==i+1){
                     s_data[j].match = i+1;
                     if (match==0){
-                        match=i+1;
+                        match=j+1;
                     } else {
-
+						for (int k=0; k<10; k++){
+							if (t.students[k]==j+1&&k<match){
+								s_data[match-1].match=0;
+								match=j+1;
+							}
+						}
                     }
                 }
             }
