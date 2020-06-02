@@ -15,6 +15,7 @@ struct Student
 struct Teacher
 {
     int students[10];
+    int match;
 };
 
 vector<string> string_split(string s, const char delimiter)
@@ -61,6 +62,7 @@ int main() {
         Teacher teacher;
         for (int j=1; j<=10; j++){
             teacher.students[j-1] = atoi(ss[j].c_str());
+            teacher.match=0;
         }
         t_data.push_back(teacher);
     }
@@ -70,14 +72,15 @@ int main() {
             Teacher t = t_data[i];
             int match = 0;
             for (int j=0; j<10; j++){
-                if (s_data[j].teachers[i]==i+1){
-                    s_data[j].match = i+1;
+                if (s_data[j].teachers[i]==i+1&&t.match==0){
                     if (match==0){
+                        s_data[j].match = i+1;
                         match=j+1;
                     } else {
 						for (int k=0; k<10; k++){
 							if (t.students[k]==j+1&&k<match){
 								s_data[match-1].match=0;
+                                s_data[j].match = i+1;
 								match=j+1;
 							}
 						}
@@ -85,7 +88,9 @@ int main() {
                 }
             }
             if (match>0)
-                t_data.erase(t_data.begin()+i);
+                //t_data.erase(t_data.begin()+i);
+                t_data[i].match=i+1;
+                match=0;
         }
         cout<<endl;
     }
