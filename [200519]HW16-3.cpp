@@ -18,8 +18,9 @@ struct Teacher
     int match;
 };
 
-vector<string> string_split(string s, const char delimiter)
+vector<string> string_split(string s)
 {
+    const char delimiter = ',';
     size_t start=0;
     size_t end=s.find_first_of(delimiter);
     
@@ -46,7 +47,7 @@ int main() {
     for (int i=0; i<10; i++){
         string s;
         cin>>s;
-        vector<string> ss = string_split(s, '\\,');
+        vector<string> ss = string_split(s);
         Student student;
         for (int j=1; j<=10; j++){
             student.teachers[j-1] = atoi(ss[j].c_str());
